@@ -3,6 +3,7 @@ import { TextInput, Button } from "../ui/Input"
 import { Login } from "../../apiService/userApi"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../store/slice/userSlice"
+import { setToken } from "../../store/slice/authSlice"
 import { useNavigate } from "react-router-dom"
 
 let LoginForm = ({ setLog }) => {
@@ -25,6 +26,7 @@ let LoginForm = ({ setLog }) => {
             let response = await Login(loginFormData)
             if(response.data.success){
                 dispatch(setUser(response.data.data))
+                dispatch(setToken(response.data.AccessToken))
             }
             navigate("/")
             setLog(true)
